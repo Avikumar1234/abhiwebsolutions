@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 
-# Install PHP dependencies
-composer install --no-interaction --prefer-dist --optimize-autoloader
+set -o errexit
 
-# Install Node dependencies and build assets
+# PHP dependencies
+composer install --no-dev --optimize-autoloader
+
+# Node modules + Vite build
 npm install
 npm run build
 
-# Laravel config and key
+# Laravel config caching
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
-
