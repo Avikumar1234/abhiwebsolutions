@@ -13,29 +13,18 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
-    supervisor \
-    libpq-dev \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+    mariadb-client \
+    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set working directory
 WORKDIR /var/www
 
-# Copy existing application directory
-COPY . /var/www
+COPY . .
 
-# Install dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install
 
-# Copy existing application directory permissions
-RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
+RUN chmod -R 777 storage bootstrap/cache
 
-# Expose port
-EXPOSE 8000
-
-# Start command
-CMD php artisan serve --host=0.0.0.0 --port=8000
-
-
+CMD ["php-fpm"]
