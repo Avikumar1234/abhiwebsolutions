@@ -6,25 +6,35 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
-    locales \
-    zip \
-    jpegoptim optipng pngquant gifsicle \
-    vim unzip git curl \
     libonig-dev \
     libxml2-dev \
+    zip \
+    unzip \
+    curl \
+    git \
+    npm \
     libzip-dev \
     mariadb-client \
-    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Set working directory
 WORKDIR /var/www
 
+# Copy files
 COPY . .
 
-RUN composer install
+# Install PHP dependencies
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-RUN chmod -R 777 storage bootstrap/cache
+# Set permissions
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www/storage
 
-CMD ["php-fpm"]
+# Expose port
+EXPOSE 8000
+
+CMD php artisan serve --host=0.0.0.0 --port=8000
+
