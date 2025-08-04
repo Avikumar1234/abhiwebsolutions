@@ -1,1 +1,22 @@
+services:
+  - type: web
+    name: abhiwebsolutions
+    env: php
+    plan: free
+    buildCommand: "./.render-build.sh"
+    startCommand: "php artisan serve --host=0.0.0.0 --port=10000"
+    rootDir: .
+    buildFilter:
+      paths:
+        - ./
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://abhiwebsolutions.onrender.com
+      - key: DB_CONNECTION
+        value: mysql
+    staticPublishPath: public
 
