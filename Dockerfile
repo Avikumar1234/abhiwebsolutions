@@ -1,35 +1,41 @@
-FROM php:8.2-apache
-
-# Enable Apache rewrite module
-RUN a2enmod rewrite
+FROM php:8.2-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git curl zip unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
-    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+    build-essential \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    zip \
+    jpegoptim optipng pngquant gifsicle \
+    vim unzip git curl \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    supervisor \
+    libpq-dev \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /var/www
 
-# Copy existing application directory contents
-COPY . /var/www/html
+# Copy existing application directory
+COPY . /var/www
 
-# Give permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+# Install dependencies
+RUN composer install --no-dev --optimize-autoloader
 
-# Apache document root
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-
-# Change apache config
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+# Copy existing application directory permissions
+RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
 
 # Expose port
-EXPOSE 80
+EXPOSE 8000
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Start command
+CMD php artisan serve --host=0.0.0.0 --port=8000
+
 
