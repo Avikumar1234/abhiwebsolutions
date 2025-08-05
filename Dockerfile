@@ -29,7 +29,7 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Install Node.js dependencies & build Vite assets
+# ✅ Install Node dependencies and build assets
 RUN npm install && npm run build
 
 # Set permissions
@@ -39,4 +39,5 @@ RUN chown -R www-data:www-data /var/www \
 # Expose port
 EXPOSE 8000
 
+# Run Laravel
 CMD php artisan serve --host=0.0.0.0 --port=8000
