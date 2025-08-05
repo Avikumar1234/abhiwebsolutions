@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
-# PHP dependencies
+# Exit on error
+set -o errexit
+
+# Install PHP dependencies
 composer install --no-dev --optimize-autoloader
 
-# Node modules + Vite build
+# Install Node dependencies and build assets
 npm install
 npm run build
 
-# Laravel caches
+# Laravel specific
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
-
+php artisan migrate --force
