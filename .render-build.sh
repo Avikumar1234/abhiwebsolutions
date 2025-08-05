@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -o errexit
-
 # PHP dependencies
 composer install --no-dev --optimize-autoloader
 
@@ -9,7 +7,8 @@ composer install --no-dev --optimize-autoloader
 npm install
 npm run build
 
-# Laravel config caching
+# Laravel caches
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
+
