@@ -60,7 +60,9 @@ Route::view('/about', 'frontend.about')->name('about');
 
 // Services (Frontend display)
 // Route::get('/services', [ServicePageController::class, 'index'])->name('frontend.services');
-Route::get('/avi', [ServicePageController::class, 'index']);
+Route::get('/services', [ServicePageController::class, 'index'])->name('services');
+
+// Route::get('/avi', [ServicePageController::class, 'index']);
 
 // Route::get('/', [ServicePageController::class, 'home'])->name('home');
 // Route::get('/', [PageController::class, 'home'])->name('home');
