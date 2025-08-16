@@ -90,7 +90,15 @@
             <div id="mobile-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden z-50">
                 <a href="/" class="block px-4 py-2 text-blue-700 hover:bg-pink-100">Home</a>
                 <a href="/about" class="block px-4 py-2 text-blue-700 hover:bg-pink-100">About</a>
-                <a href="/services" class="block px-4 py-2 text-blue-700 hover:bg-pink-100">Services</a>
+
+                <!-- Mobile Services Dropdown -->
+<div class="block px-4 py-2 text-blue-700 hover:bg-pink-100">
+    <a href="/services/logo-design" class="block px-4 py-2 hover:bg-pink-100">Logo Design</a>
+    <a href="/services/website-design" class="block px-4 py-2 hover:bg-pink-100">Website Design</a>
+    <a href="/services/social" class="block px-4 py-2 hover:bg-pink-100">Social Media Poster</a>
+    <a href="/services/ecommerce" class="block px-4 py-2 hover:bg-pink-100">eCommerce Site</a>
+</div>
+
                 <a href="/contact" class="block px-4 py-2 text-blue-700 hover:bg-pink-100">Contact</a>
             </div>
         </div>
@@ -454,6 +462,8 @@
             reply = "🤖: You can call us at 📞 7379210635";
         } else if (msg.toLowerCase().includes('hello') || msg.toLowerCase().includes('hi')) {
             reply = "🤖: Hello! How can I help you today?";
+
+            
         } else if (msg.toLowerCase().includes('bye')) {
             reply = "🤖: Goodbye! Feel free to ask anytime.";
         }
