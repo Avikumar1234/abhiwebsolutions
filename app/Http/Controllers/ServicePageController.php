@@ -9,7 +9,7 @@ class ServicePageController extends Controller
 {
     public function index()
     {
-        $services = Service::all();
-        return view('frontend.services.index', compact('services'));
+        $services = Service::all(); // agar service table me data hai
+        return view('frontend.services', compact('services'));
     }
 }
