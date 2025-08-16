@@ -222,7 +222,8 @@
     {{-- projcets --}}
 
 <!-- ✅ Footer with Social Icons -->
-<section class="py-2 bg-yellow-300 px-2">
+    <section class="py-2 bg-blue-200 px-2">
+
 
     <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-2 sm:grid-cols-4 text-center text-gray-800 gap-6">
