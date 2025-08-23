@@ -230,30 +230,29 @@
     {{-- projcets --}}
 
 <!-- ✅ Footer with Social Icons -->
-    <section class="py-2 bg-blue-200 px-2">
-
-
+<section class="py-2 bg-blue-200 px-2">
     <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-2 sm:grid-cols-4 text-center text-gray-800 gap-6">
+        <div class="grid grid-cols-2 sm:grid-cols-3 text-center text-gray-800 gap-6">
+            
             <div>
-                <div class="text-4xl font-extrabold counter" data-target="20">0</div>
-                <div class="mt-1 font-medium">🏆 Awards Won</div>
-            </div>
-            <div>
-                <div class="text-4xl font-extrabold counter" data-target="30">0</div>
+                <div class="text-4xl font-extrabold counter" data-target="6">0</div>
                 <div class="mt-1 font-medium">💼 Projects Done</div>
             </div>
+            
             <div>
-                <div class="text-4xl font-extrabold counter" data-target="40">0</div>
+                <div class="text-4xl font-extrabold counter" data-target="2">0</div>
                 <div class="mt-1 font-medium">😊 Satisfied Clients</div>
             </div>
+            
             <div>
-                <div class="text-4xl font-extrabold counter" data-target="59">0</div>
+                <div class="text-4xl font-extrabold counter" data-target="7">0</div>
                 <div class="mt-1 font-medium">🚧 Running Projects</div>
             </div>
+
         </div>
     </div>
 </section>
+
 
 <script>
     const counters = document.querySelectorAll('.counter');
